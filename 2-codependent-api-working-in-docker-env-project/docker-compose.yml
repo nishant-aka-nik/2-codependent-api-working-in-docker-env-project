@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+
+  # Building api2(POST API which will take payload from api1 and store it in mongoDB) docker image 
+  api2:
+    build: 
+      context: .
+      dockerfile: ./api2/Dockerfile
+    ports:
+      - "8081:8081"
+
+    networks:
+      - local
+
+  # Building api1(POST API which will scrape data from amazon and send payload to api2) docker image
+  api1:
+    build: 
+      context: .
+      dockerfile: ./api/Dockerfile
+    ports:
+      - "8080:8080"
+
+    links:
+      - api2
+
+networks:
+  local:
+    driver: bridge
