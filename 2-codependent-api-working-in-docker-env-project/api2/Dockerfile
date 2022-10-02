@@ -13,7 +13,7 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY ./api2 .
 
-# Build the Go app
+# To build the go app, run this command
 RUN go build -o main .
 
 # Expose port 8080 to the outside world
